@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center align-items-center text-center vh-100">
+    <h2 class="display-4 mb-4">Are you ready to track your daily habits?</h2>
+    {% if not user.is_authenticated %}
+        <div class="d-flex flex-column">
+            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg mb-3">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary btn-lg">Login</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
