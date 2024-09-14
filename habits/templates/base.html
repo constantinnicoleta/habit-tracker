@@ -25,11 +25,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg">
         <div class="container-fluid">
+            <!-- Brand and Toggle Button -->
             <a class="navbar-brand" href="{% url 'home' %}">Habit Tracker</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
+    
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -41,15 +44,33 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
                     {% endif %}
                 </ul>
-                <!-- Hide the text on mobile devices using Bootstrap classes -->
-                <span class="navbar-text d-none d-lg-block">
-                    Track your habits with ease
-                </span>
+    
+                <div class="ms-auto text-end">
+                    <div>Track your habits with ease</div>
+                    {% if user.is_authenticated %}
+                        <div class="small">Logged in as {{ user.username }}</div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
+    
+    <!-- Additional CSS for styling -->
+    <style>
+        .small {
+            font-size: 0.8rem;
+            color: #999da0;
+        }
+    </style>
 
     <main class="flex-shrink-0">
         <!-- Main content block -->
