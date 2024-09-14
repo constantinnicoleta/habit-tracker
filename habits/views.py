@@ -10,7 +10,7 @@ from .models import Progress
 
 # HomeView renders the 'home.html' template when accessed
 class HomeView(TemplateView):
-    template_name = 'home.html'
+    template_name = 'habits/home.html'
 
 
 # Handle form submission (POST request)
@@ -25,7 +25,7 @@ def signup(request):
             return redirect('home')  
     else:
         form = CustomUserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'habits/signup.html', {'form': form})
 
 
 @login_required
@@ -40,7 +40,7 @@ def add_habit(request):
     else:
         form = HabitForm()
 
-    return render(request, 'add_habit.html', {'form': form})    
+    return render(request, 'habits/add_habit.html', {'form': form})    
 
 
 # View the user's dashboard with all their habits
@@ -48,7 +48,7 @@ def add_habit(request):
 @login_required
 def dashboard(request):
     user_habits = Habit.objects.filter(user=request.user)
-    return render(request, 'dashboard.html', {'user_habits': user_habits})
+    return render(request, 'habits/dashboard.html', {'user_habits': user_habits})
 
 
 # Edit an existing habit
@@ -65,7 +65,7 @@ def edit_habit(request, habit_id):
     else:
         form = HabitForm(instance=habit)
     
-    return render(request, 'edit_habit.html', {'form': form})
+    return render(request, 'habits/edit_habit.html', {'form': form})
 
 
 # Edit an existing habit
@@ -77,7 +77,7 @@ def delete_habit(request, habit_id):
         habit.delete()
         return redirect('dashboard')
     
-    return render(request, 'delete_habit.html', {'habit': habit})
+    return render(request, 'habits/delete_habit.html', {'habit': habit})
 
 # Track progress for a specific habit
 @login_required
@@ -99,7 +99,7 @@ def track_progress(request, habit_id):
     # Fetch all progress entries for this habit to display history
     progress_history = Progress.objects.filter(habit=habit).order_by('-date')
 
-    return render(request, 'track_progress.html', {
+    return render(request, 'habits/track_progress.html', {
         'habit': habit,
         'today': today,
         'progress': progress,
