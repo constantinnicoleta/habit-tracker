@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2>Edit Habit</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update</button>
-        <!-- Cancel Button -->
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-5">
+            <!-- Card for the Form -->
+            <div class="card custom-card shadow-lg">
+                <div class="card-header text-center custom-card-header">
+                    <h2 class="mb-0">Edit Habit</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="habit-form">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.start_date.label_tag }}
+                            {{ form.start_date }}
+                        </div>
+                        
+                        <!-- Button Group -->
+                        <div class="d-flex flex-column flex-md-row justify-content-between mt-4">
+                            <button type="submit" class="btn btn-custom mb-2 mb-md-0">Edit Habit</button>
+                            <a href="{% url 'dashboard' %}" class="btn btn-faded-grey">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

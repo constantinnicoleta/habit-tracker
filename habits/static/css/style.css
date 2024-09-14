@@ -1,0 +1,87 @@
+
+/* Custom Card Styles */
+.custom-card {
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+}
+
+/* Header Customization */
+.custom-card-header {
+    background-color: #c2bfbb;
+    color: #4a4a4a;
+    padding: 1.5rem;
+    border-bottom: 2px solid #b3a494;
+}
+
+.custom-card-header h2 {
+    margin-bottom: 0.3rem;
+}
+
+.custom-card-header p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Form Styles */
+.habit-form .form-group {
+    position: relative;
+}
+
+.habit-form label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.habit-form input,
+.habit-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-shadow: none;
+    transition: border-color 0.2s;
+}
+
+.habit-form input:focus,
+.habit-form textarea:focus {
+    border-color: #d1c4b2;
+    outline: none;
+}
+
+/* Button Styles */
+.btn-custom {
+    background-color: rgba(108, 117, 125, 0.8);
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom:hover {
+    background-color: rgba(108, 117, 125, 0.9);
+}
+
+.btn-faded-grey {
+    background-color: rgba(189, 189, 189, 0.8);
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-faded-grey:hover {
+    background-color: rgba(189, 189, 189, 0.9);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .btn-custom,
+    .btn-faded-grey {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}

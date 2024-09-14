@@ -5,10 +5,10 @@
     <h2 class="mb-4 text-center">Your Habits</h2>
 
     <!-- Add Habit Button -->
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'add_habit' %}" class="btn btn-primary">Add New Habit</a>
+    <div class="d-flex justify-content-center mb-3">
+        <a href="{% url 'add_habit' %}" class="btn btn-faded-grey btn-custom mb-2 mb-md-0 ">Add New Habit</a>
     </div>
-
+    
     {% if user_habits %}
         <div class="row">
             {% for habit in user_habits %}
