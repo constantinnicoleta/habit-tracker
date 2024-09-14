@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Habit
 
 
 # CustomUserCreationForm adds a required email field and removes help text
@@ -33,3 +34,8 @@ def clean_email(self):
     
     return email
 
+
+class HabitForm(forms.ModelForm):
+    class Meta:
+        model = Habit
+        fields = ['name', 'description'] 

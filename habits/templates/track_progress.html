@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Track Progress for "{{ habit.name }}"</h2>
+    <p>Progress for: {{ today }}</p>
+
+    <!-- Check if the progress for today has been completed or not -->
+    {% if progress.completed %}
+        <p class="text-success">You have already completed this habit for today!</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <p>Did you complete this habit today?</p>
+            <button type="submit" class="btn btn-success">Mark as Completed</button>
+        </form>
+    {% endif %}
+
+    <hr>
+
+    <!-- Display Progress History -->
+    <h3>Progress History</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for progress_entry in progress_history %}
+                <tr>
+                    <td>{{ progress_entry.date }}</td>
+                    <td>
+                        {% if progress_entry.completed %}
+                            <span class="text-success">Completed</span>
+                        {% else %}
+                            <span class="text-danger">Not Completed</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+{% endblock %}
