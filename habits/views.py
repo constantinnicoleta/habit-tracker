@@ -37,6 +37,7 @@ def add_habit(request):
             habit = form.save(commit=False)
             habit.user = request.user
             habit.save()
+            messages.success(request, f'Your new habit "{habit.name}" was successfully added.')
             return redirect('dashboard')
     else:
         form = HabitForm()
@@ -48,8 +49,20 @@ def add_habit(request):
  # Render the dashboard with the user's habits
 @login_required
 def dashboard(request):
-    user_habits = Habit.objects.filter(user=request.user)
-    return render(request, 'habits/dashboard.html', {'user_habits': user_habits})
+    # Get the filter type from the query parameters (default to 'all')
+    filter_type = request.GET.get('filter', 'all')
+
+    if filter_type == 'finished':
+        # Filter habits that are marked as finished
+        user_habits = Habit.objects.filter(user=request.user, finished=True)
+    elif filter_type == 'unfinished':
+        # Filter habits that are not marked as finished
+        user_habits = Habit.objects.filter(user=request.user, finished=False)
+    else:
+        # Default: Get all habits for the logged-in user
+        user_habits = Habit.objects.filter(user=request.user)
+    
+    return render(request, 'habits/dashboard.html', {'user_habits': user_habits, 'filter_type': filter_type})
 
 
 # Edit an existing habit
@@ -62,6 +75,7 @@ def edit_habit(request, habit_id):
         form = HabitForm(request.POST, instance=habit)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Your habit "{habit.name}" was successfully updated.')
             return redirect('dashboard')
     else:
         form = HabitForm(instance=habit)
@@ -76,6 +90,7 @@ def delete_habit(request, habit_id):
     
     if request.method == 'POST':
         habit.delete()
+        messages.success(request, f'Your habit "{habit.name}" was successfully deleted.')
         return redirect('dashboard')
     
     return render(request, 'habits/delete_habit.html', {'habit': habit})

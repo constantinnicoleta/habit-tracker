@@ -4,6 +4,13 @@
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Your Habits</h2>
 
+    <!-- Filter Buttons -->
+    <div class="d-flex justify-content-center mb-3">
+        <a href="?filter=all" class="btn btn-faded-grey mx-1 {% if filter_type == 'all' %}active{% endif %}">All</a>
+        <a href="?filter=finished" class="btn btn-faded-grey mx-1 {% if filter_type == 'finished' %}active{% endif %}">Finished</a>
+        <a href="?filter=unfinished" class="btn btn-faded-grey mx-1 {% if filter_type == 'unfinished' %}active{% endif %}">Unfinished</a>
+    </div>
+
     <!-- Add Habit Button -->
     <div class="d-flex justify-content-center mb-3">
         <a href="{% url 'add_habit' %}" class="btn btn-faded-grey btn-custom mb-2 mb-md-0">Add New Habit</a>
@@ -33,7 +40,7 @@
                                     <a href="{% url 'edit_habit' habit.id %}" class="btn btn-sm btn-faded-warning mx-1">Edit</a>
                                     <a href="{% url 'delete_habit' habit.id %}" class="btn btn-sm btn-faded-danger mx-1">Delete</a>
                                     <!-- Finished Button -->
-                                    <a href="{% url 'finish_habit' habit.id %}" class="btn btn-sm btn-faded-success mx-1">Finished</a>
+                                    <a href="{% url 'finish_habit' habit.id %}" class="btn btn-sm btn-faded-success mx-1">Finish</a>
                                 </div>
                             {% endif %}
                         </div>
