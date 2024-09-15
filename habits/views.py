@@ -158,6 +158,8 @@ def todays_habits(request):
 
     return render(request, 'habits/todays_habits.html', context)
 
+
+#View to mark habit as finished 
 @login_required
 def finish_habit(request, habit_id):
     habit = get_object_or_404(Habit, id=habit_id, user=request.user)

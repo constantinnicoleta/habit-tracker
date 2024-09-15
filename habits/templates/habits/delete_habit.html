@@ -2,10 +2,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Add some margin to the title -->
     <h2 class="text-center mb-4">Are you sure you want to delete "{{ habit.name }}"?</h2>
 
-    <!-- Center the form and style the buttons -->
     <div class="d-flex justify-content-center">
         <form method="post">
             {% csrf_token %}
