@@ -142,5 +142,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'  # Redirect to root  after a successful login
+LOGIN_REDIRECT_URL = 'todays_habits'  # Redirect to root  after a successful login
 LOGOUT_REDIRECT_URL = 'home'  # Redirect to the home page after logging out

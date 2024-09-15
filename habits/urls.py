@@ -3,8 +3,8 @@ from .views import signup, HomeView, dashboard, add_habit, edit_habit, delete_ha
 
 urlpatterns = [
     path('signup/', signup, name='signup'),
-    path('', todays_habits, name='todays_habits'),
     path('', HomeView.as_view(), name='home'),
+    path('todays-habits/', todays_habits, name='todays_habits'),
     path('dashboard/', dashboard, name='dashboard'),
     path('add-habit/', add_habit, name='add_habit'),
     path('edit-habit/<int:habit_id>/', edit_habit, name='edit_habit'),

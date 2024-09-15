@@ -77,6 +77,11 @@
     background-color: rgba(189, 189, 189, 0.9);
 }
 
+.small {
+    font-size: 0.8rem;
+    color: #999da0;
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 576px) {
