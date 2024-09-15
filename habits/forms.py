@@ -27,14 +27,12 @@ class CustomUserCreationForm(UserCreationForm):
 # Custom email validation
 def clean_email(self):
     email = self.cleaned_data.get('email')
-    
+
     # Check if the email is already in use
     if User.objects.filter(email=email).exists():
         raise forms.ValidationError('This email address is already registered.')
-    
+
     return email
-
-
 class HabitForm(forms.ModelForm):
     class Meta:
         model = Habit
