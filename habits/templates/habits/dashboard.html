@@ -6,7 +6,7 @@
 
     <!-- Add Habit Button -->
     <div class="d-flex justify-content-center mb-3">
-        <a href="{% url 'add_habit' %}" class="btn btn-faded-grey btn-custom mb-2 mb-md-0 ">Add New Habit</a>
+        <a href="{% url 'add_habit' %}" class="btn btn-faded-grey btn-custom mb-2 mb-md-0">Add New Habit</a>
     </div>
     
     {% if user_habits %}
@@ -23,11 +23,19 @@
                                 </p>
                             </div>
 
-                            <div class="d-flex justify-content-center mt-3">
-                                <a href="{% url 'track_progress' habit.id %}" class="btn btn-sm btn-faded-success mx-1">Track</a>
-                                <a href="{% url 'edit_habit' habit.id %}" class="btn btn-sm btn-faded-warning mx-1">Edit</a>
-                                <a href="{% url 'delete_habit' habit.id %}" class="btn btn-sm btn-faded-danger mx-1">Delete</a>
-                            </div>
+                            {% if habit.finished %}
+                                <!-- Show this if the habit is marked as finished -->
+                                <p class="text-success text-center">Finished</p>
+                            {% else %}
+                                <!-- Show buttons if the habit is not finished -->
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a href="{% url 'track_progress' habit.id %}" class="btn btn-sm btn-faded-success mx-1">Track</a>
+                                    <a href="{% url 'edit_habit' habit.id %}" class="btn btn-sm btn-faded-warning mx-1">Edit</a>
+                                    <a href="{% url 'delete_habit' habit.id %}" class="btn btn-sm btn-faded-danger mx-1">Delete</a>
+                                    <!-- Finished Button -->
+                                    <a href="{% url 'finish_habit' habit.id %}" class="btn btn-sm btn-faded-success mx-1">Finished</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
