@@ -2,12 +2,19 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Are you sure you want to delete "{{ habit.name }}"?</h2>
-    
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Yes</button>
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+    <!-- Add some margin to the title -->
+    <h2 class="text-center mb-4">Are you sure you want to delete "{{ habit.name }}"?</h2>
+
+    <!-- Center the form and style the buttons -->
+    <div class="d-flex justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            <!-- Use a button group to keep buttons together -->
+            <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-danger me-2">Yes</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
