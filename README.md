@@ -3,8 +3,7 @@
    The Habit Tracker is a full-stack web application that allows users to create, track, and manage their daily habits. It is designed to help users develop and maintain good habits by providing a user-friendly interface to monitor their progress over time.
 
 
-Link to the deployed project - 
-
+Link to the deployed project - [Click here](https://habits-tracker-project-a77e8ee5e618.herokuapp.com/)
 # Planning Overview
 
 ## Site Goals
@@ -232,7 +231,7 @@ Click on 'Code' to the right of the screen. This will open a dropdown. Click on 
 - Open Git Bash in your IDE and change the current working directory to the location where you want the cloned directory.
 - Type git clone, paste the URL you copied earlier, and press Enter to create your local clone.
 
-Live link can be found - 
+Live link can be found - [Click here](https://habits-tracker-project-a77e8ee5e618.herokuapp.com/)
 
 
 # Credits:

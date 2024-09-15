@@ -82,8 +82,7 @@ def edit_habit(request, habit_id):
         form = HabitForm(request.POST, instance=habit)
         if form.is_valid():
             form.save()
-            messages.success
-            (request, f'Your habit"{habit.name}" was successfully updated.')
+            messages.success(request, f'Your habit "{habit.name}" was successfully updated.')
             return redirect('dashboard')
     else:
         form = HabitForm(instance=habit)
@@ -98,8 +97,7 @@ def delete_habit(request, habit_id):
 
     if request.method == 'POST':
         habit.delete()
-        messages.success
-        (request, f'Your habit "{habit.name}" was successfully deleted.')
+        messages.success(request, f'Your habit "{habit.name}" was successfully deleted.')
         return redirect('dashboard')
 
     return render(request, 'habits/delete_habit.html', {'habit': habit})
@@ -127,15 +125,6 @@ def track_progress(request, habit_id):
         unmarked_habits = Habit.objects.filter(user=request.user).exclude(
             progress__date=today, progress__completed=True
         )
-
-        if unmarked_habits.exists():
-            # Redirect back to 'todays_habits'
-            # if there are still habits to complete
-            return redirect('todays_habits')
-        else:
-            # All habits are completed,
-            # set a success message and redirect to 'todays_habits'
-            messages.success(request, "Yay, all habits completed for today!")
 
         return redirect('todays_habits')
 
