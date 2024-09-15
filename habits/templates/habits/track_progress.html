@@ -43,6 +43,11 @@
         </tbody>
     </table>
 
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    <!-- Conditionally render the back button based on 'from_page' -->
+    {% if from_page == 'today' %}
+        <a href="{% url 'todays_habits' %}" class="btn btn-secondary mt-3">Back to Today's Habits</a>
+    {% else %}
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    {% endif %}
 </div>
 {% endblock %}

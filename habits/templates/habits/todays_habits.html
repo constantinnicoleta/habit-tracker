@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Today's Habits to Complete</h2>
+    
+    <!-- Display Success Message -->
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="alert alert-success custom-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if unmarked_habits %}
+        <div class="row">
+            {% for habit in unmarked_habits %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card custom-card shadow-sm">
+                        <div class="custom-card-header text-center">
+                            <h5 class="habit-title">{{ habit.name }}</h5>
+                            <p class="habit-description">{{ habit.description }}</p>
+                        </div>
+                        <!-- Card Body: Include the start date and button -->
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <p class="start-date text-muted">
+                                <small>Started on: {{ habit.start_date }}</small>
+                            </p>
+                            <!-- Mark as Completed Button -->
+                            <a href="{% url 'track_progress' habit.id %}?from=today" class="btn btn-faded-grey btn-custom-complete mb-2 mb-md-0">Mark as Completed</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            <p>Don't forget to come back tomorrow!</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

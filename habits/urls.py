@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import signup, HomeView, dashboard, add_habit, edit_habit, delete_habit, track_progress
+from .views import signup, HomeView, dashboard, add_habit, edit_habit, delete_habit, track_progress, todays_habits
 
 urlpatterns = [
     path('signup/', signup, name='signup'),
+    path('', todays_habits, name='todays_habits'),
     path('', HomeView.as_view(), name='home'),
     path('dashboard/', dashboard, name='dashboard'),
     path('add-habit/', add_habit, name='add_habit'),

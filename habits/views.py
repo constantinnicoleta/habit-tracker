@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages  
 from django.utils import timezone
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -79,29 +80,65 @@ def delete_habit(request, habit_id):
     
     return render(request, 'habits/delete_habit.html', {'habit': habit})
 
+
 # Track progress for a specific habit
 @login_required
 def track_progress(request, habit_id):
-    habit = get_object_or_404(Habit, id=habit_id, user=request.user)
+    # Get today's date
     today = timezone.now().date()
 
-    # Get or create progress for today's date
-    progress, created = Progress.objects.get_or_create(
-        habit=habit, date=today, defaults={'completed': False}
-    )
-
-    # Handle form submission (when user marks progress as completed)
+    # Get the 'from' parameter to determine the origin of the request
+    from_page = request.GET.get('from', 'dashboard') 
+    
+    # Get the habit and create a new Progress entry
+    habit = Habit.objects.get(id=habit_id, user=request.user)
+    progress, created = Progress.objects.get_or_create(habit=habit, date=today)
+    
     if request.method == 'POST':
+        # Mark the habit as completed for today
         progress.completed = True
         progress.save()
-        return redirect('dashboard')
 
-    # Fetch all progress entries for this habit to display history
+        # Check if there are still unmarked habits for today
+        unmarked_habits = Habit.objects.filter(user=request.user).exclude(
+            progress__date=today, progress__completed=True
+        )
+
+        if unmarked_habits.exists():
+            # Redirect back to 'todays_habits' if there are still habits to complete
+            return redirect('todays_habits')
+        else:
+            # All habits are completed, set a success message and redirect to 'todays_habits'
+            messages.success(request, "Congratulations, you've completed all habits for today!")
+            return redirect('todays_habits')
+
+    # If GET request, show the tracking form
     progress_history = Progress.objects.filter(habit=habit).order_by('-date')
 
-    return render(request, 'habits/track_progress.html', {
+    context = {
         'habit': habit,
         'today': today,
         'progress': progress,
-        'progress_history': progress_history
-    })
+        'progress_history': progress_history,
+        'from_page': from_page,
+    }
+
+    return render(request, 'habits/track_progress.html', context)
+
+
+@login_required
+def todays_habits(request):
+    # Get today's date
+    today = timezone.now().date()
+
+    # Get user's habits that are not marked as completed today
+    unmarked_habits = Habit.objects.filter(user=request.user).exclude(
+        progress__date=today, progress__completed=True
+    )
+
+    context = {
+        'unmarked_habits': unmarked_habits,
+        'today': today
+    }
+
+    return render(request, 'habits/todays_habits.html', context)
